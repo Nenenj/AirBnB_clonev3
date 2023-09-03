@@ -9,11 +9,12 @@ import os
 
 env.hosts = ["52.3.251.115", "54.208.17.71"]
 env.user = "ubuntu"
+env.key_filename = '~/.ssh/school'
 
 
-def do_pack():
+def do_deploy(archive_path):
     """
-        return the archive path if archive has generated correctly.
+        Deploys an archive path if archive has generated correctly.
     """
 
     local("mkdir -p versions")
