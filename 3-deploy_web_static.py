@@ -7,7 +7,10 @@ distributes an archive to the web servers
 from fabric.api import env, local, put, run
 from datetime import datetime
 from os.path import exists, isdir
+
 env.hosts = ['52.3.251.115', '54.208.17.71']
+env.user = "ubuntu"
+env.key_filename = 'home/ubuntu/.ssh/school'
 
 
 def do_pack():
@@ -25,7 +28,7 @@ def do_pack():
 
 def do_deploy(archive_path):
     """distributes an archive to the web servers"""
-    if exists(archive_path) is False:
+    if not exists(archive_path) is False:
         return False
     try:
         file_n = archive_path.split("/")[-1]

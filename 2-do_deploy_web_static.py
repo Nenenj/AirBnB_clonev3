@@ -3,13 +3,13 @@
 Fabric script that distributes an archive to your web servers
 """
 
+from fabric.api import env, put, run, local
+from os.path import exists, isfile
 from datetime import datetime
-from fabric.api import *
-import os
 
 env.hosts = ["52.3.251.115", "54.208.17.71"]
 env.user = "ubuntu"
-env.key_filename = '~/.ssh/school'
+env.key_filename = '/home/ubuntu/.ssh/school'
 
 
 def do_deploy(archive_path):
@@ -32,7 +32,7 @@ def do_deploy(archive_path):
     """
         Distribute archive.
     """
-    if os.path.exists(archive_path):
+    if not exists(archive_path):
         archived_file = archive_path[9:]
         newest_version = "/data/web_static/releases/" + archived_file[:-4]
         archived_file = "/tmp/" + archived_file

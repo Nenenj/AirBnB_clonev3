@@ -2,27 +2,28 @@
 """
 starts a Flask web application
 """
+from flask import Flask, escape
 
-from flask import Flask
+# Create a Flask web application
 app = Flask(__name__)
 
-
+# Define a route for the root URL ("/") with strict_slashes=False
 @app.route('/', strict_slashes=False)
-def index():
-    """returns Hello HBNB!"""
+def hello_hbnb():
     return 'Hello HBNB!'
 
-
+# Define a route for "/hbnb" with strict_slashes=False
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    """returns HBNB"""
     return 'HBNB'
 
-
+# Define a route for "/c/<text>" with strict_slashes=False
 @app.route('/c/<text>', strict_slashes=False)
-def cisfun(text):
-    """display “C ” followed by the value of the text variable"""
-    return 'C ' + text.replace('_', ' ')
+def c_text(text):
+    # Replace underscores with spaces and return the result
+    text = escape(text).replace('_', ' ')
+    return 'C ' + text
 
+# Run the application on 0.0.0.0:5000
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000')
+    app.run(host='0.0.0.0', port=5000)
